@@ -93,11 +93,15 @@ class ActionGroup extends React.Component {
       let iconElement = undefined;
 
       if (icons && icons[i]) {
-        const iconStyle = [styles.icon]
-        if (textStyle.color !== undefined && textStyle.color !== null) {
-          iconStyle.push({ tintColor: textStyle.color })
-        }
-        iconElement = <Image source={icons[i]} resizeMode="contain" style={iconStyle} />;
+          if (React.isValidElement(icons[i])) {
+              iconElement = icons[i];
+          } else {
+              const iconStyle = [styles.icon];
+              if (textStyle.color !== undefined && textStyle.color !== null) {
+                  iconStyle.push({ tintColor: textStyle.color });
+              }
+              iconElement = <Image source={icons[i]} resizeMode="contain" style={iconStyle} />
+          }
       }
 
       optionViews.push(
